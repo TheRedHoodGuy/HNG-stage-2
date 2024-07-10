@@ -1,32 +1,39 @@
-import '../styles/Cart.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faArrowRight, faBookmark, faChevronLeft, faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import {  faHeart } from '@fortawesome/free-regular-svg-icons';
-import paginationItems from '../data/paginationitems.json';
-import { useCart } from './CartContext';
-import { Link } from 'react-router-dom';
+import "../styles/Cart.css";
+import { FontAwesome } from "@fortawesome/react-fontawesome";
+import {
+  faAngleDown,
+  faArrowRight,
+  faBookmark,
+  faChevronLeft,
+  faMinus,
+  faPlus,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import Pagination from "../data/Pagination.json";
+import { useCart } from "./CartContext";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-
-  const { cartItems, removeFromCart, updateItemQuantity, clearCart } = useCart();
+  const { cartItems, removeFromCart, updateItemQuantity, clearCart } =
+    useCart();
 
   const handleQuantityChange = (itemId, quantity) => {
     if (quantity >= 1) {
       updateItemQuantity(itemId, quantity);
     }
   };
-  const itemsToShow = paginationItems.slice(0, 4);
-
-
+  const itemsToShow = Pagination.slice(0, 4);
 
   return (
-    <div className='cart'>
-      <header className='cart_header'>
-      </header>
-      <main className='Cart_body'>
+    <div className="cart">
+      <header className="cart_header"></header>
+      <main className="Cart_body">
         <div className="cart_intro">
-          <Link to="/" className='back_home'>
-            <span><FontAwesomeIcon icon={faChevronLeft} className='back_home_icon'/></span>
+          <Link to="/" className="back_home">
+            <span>
+              <FontAwesome icon={faChevronLeft} className="back_home_icon" />
+            </span>
             Back
           </Link>
           <h2>Shopping Cart </h2>
@@ -65,22 +72,40 @@ const Cart = () => {
                   <div className="cart_pricing_wrapper">
                     <h2>${item.price}</h2>
                     <div className="quantity_con">
-                      <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>
-                        <FontAwesomeIcon icon={faMinus} className='quantity_icon'/>
+                      <button
+                        onClick={() =>
+                          handleQuantityChange(item.id, item.quantity - 1)
+                        }
+                      >
+                        <FontAwesome icon={faMinus} className="quantity_icon" />
                       </button>
-                      <input type='number' value={item.quantity} className='quantity_number' readOnly />
-                      <button onClick={() => handleQuantityChange(item.id, item.quantity + 1)}>
-                        <FontAwesomeIcon icon={faPlus} className='quantity_icon'/>
+                      <input
+                        type="number"
+                        value={item.quantity}
+                        className="quantity_number"
+                        readOnly
+                      />
+                      <button
+                        onClick={() =>
+                          handleQuantityChange(item.id, item.quantity + 1)
+                        }
+                      >
+                        <FontAwesome icon={faPlus} className="quantity_icon" />
                       </button>
                     </div>
                   </div>
-                  <button className='delete_cart_btn' onClick={() => removeFromCart(item.id)}>
-                    <FontAwesomeIcon icon={faTrashCan} />
+                  <button
+                    className="delete_cart_btn"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    <FontAwesome icon={faTrashCan} />
                   </button>
                 </li>
               ))}
               <div className="remove_all_cart_con">
-                <button onClick={clearCart} className='remove_all_cart_btn'>Remove all</button>
+                <button onClick={clearCart} className="remove_all_cart_btn">
+                  Remove all
+                </button>
               </div>
             </ul>
           </div>
@@ -90,32 +115,46 @@ const Cart = () => {
               <div className="coupon_con">
                 <h3>Apply Coupon</h3>
                 <p>Using A Promo Code?</p>
-                  <form action="">
-                    <div className="coupon_form">
-                      <input type="text" 
-                      name="coupon" 
-                      id="coupon" 
-                      placeholder='coupon code'
-                      className='coupon_bar'
-                      />
-                      <input type="submit" value="apply" className='coupon_btn' />
-                    </div>
-                  </form>
+                <form action="">
+                  <div className="coupon_form">
+                    <input
+                      type="text"
+                      name="coupon"
+                      id="coupon"
+                      placeholder="coupon code"
+                      className="coupon_bar"
+                    />
+                    <input type="submit" value="apply" className="coupon_btn" />
+                  </div>
+                </form>
               </div>
             </div>
             <div className="carted_order_body">
-              <h2>Estimate Shipping and tax 
-                <span><FontAwesomeIcon icon={faAngleDown} /></span>
+              <h2>
+                Estimate Shipping and tax
+                <span>
+                  <FontAwesome icon={faAngleDown} />
+                </span>
               </h2>
               <div className="carted_order_body_det">
                 <ul>
-                  <li className='carted_ord_bod_li'>Items <span>3</span></li>
-                  <li className='carted_ord_bod_li'>Total quantities <span>5</span></li>
-                  <li className='carted_ord_bod_li'>Sub Total <span>$384.87</span></li>
-                  <li className='carted_ord_bod_li'>Tax <span>$1.50</span></li>
-                  <li className='carted_ord_bod_Total'>Total <span>$386.37</span></li>
+                  <li className="carted_ord_bod_li">
+                    Items <span>3</span>
+                  </li>
+                  <li className="carted_ord_bod_li">
+                    Total quantities <span>5</span>
+                  </li>
+                  <li className="carted_ord_bod_li">
+                    Sub Total <span>$384.87</span>
+                  </li>
+                  <li className="carted_ord_bod_li">
+                    Tax <span>$1.50</span>
+                  </li>
+                  <li className="carted_ord_bod_Total">
+                    Total <span>$386.37</span>
+                  </li>
                 </ul>
-                <button className='checkout_btn'>Checkout</button>
+                <button className="checkout_btn">Checkout</button>
               </div>
             </div>
           </div>
@@ -123,13 +162,20 @@ const Cart = () => {
         <div className="Recent_check_item_con">
           <div className="Recent_check_item">
             <h2>Recently Checked</h2>
-            <a href="/">Sell All <span><FontAwesomeIcon icon={faArrowRight} /></span></a>
+            <a href="/">
+              Sell All{" "}
+              <span>
+                <FontAwesome icon={faArrowRight} />
+              </span>
+            </a>
           </div>
           <div className="Recent_item_div">
-            {itemsToShow.map((recentItem, index)=> (
+            {itemsToShow.map((recentItem, index) => (
               <div className="Recent_item" key={index}>
                 <div className="recent_fav_btn_con">
-                  <button className='recent_fav_btn'><FontAwesomeIcon icon={faHeart} /></button>
+                  <button className="recent_fav_btn">
+                    <FontAwesome icon={faHeart} />
+                  </button>
                 </div>
                 <div className="recent_img_con">
                   <img src={recentItem.img} alt="img" />
@@ -148,9 +194,13 @@ const Cart = () => {
                   </div>
                 </div>
                 <div className="recent_add_con">
-                  <button><FontAwesomeIcon icon={faBookmark} className='Bookmark'/></button>
                   <button>
-                    <span><FontAwesomeIcon icon={faPlus} /></span>
+                    <FontAwesome icon={faBookmark} className="Bookmark" />
+                  </button>
+                  <button>
+                    <span>
+                      <FontAwesome icon={faPlus} />
+                    </span>
                     add to cart
                   </button>
                 </div>
@@ -160,14 +210,21 @@ const Cart = () => {
         </div>
         <div className="cart_hero_page">
           <div className="cart_context">
-            <h1>Wear the best Sneakers <br></br>
-            on your foot!</h1>
-            <a href="/">Read More <span><FontAwesomeIcon icon={faArrowRight} /></span></a>
+            <h1>
+              Wear the best Sneakers <br></br>
+              on your foot!
+            </h1>
+            <a href="/">
+              Read More{" "}
+              <span>
+                <FontAwesome icon={faArrowRight} />
+              </span>
+            </a>
           </div>
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;
